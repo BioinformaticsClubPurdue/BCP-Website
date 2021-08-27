@@ -1,0 +1,23 @@
+import { Box } from "@chakra-ui/react";
+import React from "react";
+import Navbar from "./Navbar";
+
+interface LayoutProps {
+  children: React.ReactNode;
+}
+
+const Layout: React.FC<LayoutProps> = ({ children }) => {
+  return (
+    <>
+      <Navbar
+        items={[
+          ["Home", "/"],
+          ["Schedule", "schedule"],
+        ]}
+      />
+      <Box>{children}</Box>
+    </>
+  );
+};
+
+export default Layout;
