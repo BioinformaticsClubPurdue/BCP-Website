@@ -1,4 +1,4 @@
-import { Box } from '@chakra-ui/react';
+import { Box, Grid } from '@chakra-ui/react';
 import React from 'react';
 import Navbar from './Navbar';
 
@@ -7,10 +7,12 @@ interface LayoutProps {
 }
 
 const Layout: React.FC<LayoutProps> = ({ children }) => (
-  <>
-    <Navbar items={['Home', 'Schedule']} />
-    <Box>{children}</Box>
-  </>
+  <Grid templateRows="50px auto" bg="scheme.main" color="scheme.text">
+    <Navbar links={['schedule']} />
+    <Box maxH="100vh" padding={5}>
+      {children}
+    </Box>
+  </Grid>
 );
 
 export default Layout;

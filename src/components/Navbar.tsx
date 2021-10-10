@@ -1,43 +1,43 @@
-import { Flex } from '@chakra-ui/react';
 import React from 'react';
-import Logo from './Logo';
-import MenuLinks from './MenuLinks';
-import MenuToggle from './MenuToggle';
+import { HStack, Link as ChakraLink, Text } from '@chakra-ui/react';
+import { Link as GatsbyLink } from 'gatsby';
+import { StaticImage } from 'gatsby-plugin-image';
 
-interface NavBarContainerProps {
-  children: React.ReactNode;
+interface NavLinkProps {
+  text: string;
 }
 
-const NavBarContainer: React.FC<NavBarContainerProps> = ({ children }) => (
-  <Flex
-    as="nav"
-    align="center"
-    justify="space-between"
-    wrap="wrap"
-    w="100%"
-    mb={8}
-    p={8}
-    bg={['scheme.main', 'scheme.main', 'transparent', 'transparent']}
-    color={['white', 'white', 'scheme.main', 'scheme.main']}
-  >
-    {children}
-  </Flex>
+const NavLink: React.FC<NavLinkProps> = ({ text }) => (
+  <ChakraLink as={GatsbyLink} to={text} onClick={() => console.log('test')}>
+    <Text fontWeight="medium">
+      {text.charAt(0).toUpperCase() + text.slice(1)}
+    </Text>
+  </ChakraLink>
 );
 
-interface NavbarProps {}
+interface NavbarProps {
+  links: string[];
+}
 
-const Navbar: React.FC<NavbarProps> = () => {
-  const [isOpen, setIsOpen] = React.useState(false);
-
-  const toggle = () => setIsOpen(!isOpen);
-
-  return (
-    <NavBarContainer>
-      <Logo />
-      <MenuToggle toggle={toggle} isOpen={isOpen} />
-      <MenuLinks isOpen={isOpen} />
-    </NavBarContainer>
-  );
-};
+const Navbar: React.FC<NavbarProps> = ({ links }) => (
+  <HStack p={4} w="100%" bg="scheme.dark">
+    <ChakraLink as={GatsbyLink} to="/">
+      <HStack>
+        <StaticImage
+          src="../assets/placeholder_icon.png"
+          alt="Club icon"
+          height={30}
+          width={30}
+        />
+        <Text fontWeight="extrabold" paddingLeft={2}>
+          BIX @ Purdue
+        </Text>
+      </HStack>
+    </ChakraLink>
+    {links.map((link: string) => (
+      <NavLink text={link} key={link} />
+    ))}
+  </HStack>
+);
 
 export default Navbar;
