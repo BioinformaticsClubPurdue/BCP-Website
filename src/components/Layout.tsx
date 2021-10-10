@@ -7,11 +7,15 @@ interface LayoutProps {
 }
 
 const Layout: React.FC<LayoutProps> = ({ children }) => (
-  <Grid templateRows="50px auto" bg="scheme.main" color="scheme.text">
+  <Grid
+    templateRows="50px auto"
+    bg="scheme.dark"
+    color="scheme.text"
+    h="100vh"
+    overflowY="auto"
+  >
     <Navbar links={['schedule']} />
-    <Box maxH="100vh" padding={5}>
-      {children}
-    </Box>
+    <Box padding={5}>{children}</Box>
   </Grid>
 );
 

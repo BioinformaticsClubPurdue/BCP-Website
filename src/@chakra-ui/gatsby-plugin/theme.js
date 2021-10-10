@@ -6,7 +6,8 @@ export default extendTheme({
     scheme: {
       main: 'rebeccapurple',
       text: 'white',
-      dark: '#20232a',
+      darker: '#20232a',
+      dark: '#282c34',
     },
   },
   fonts: {

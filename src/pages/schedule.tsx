@@ -6,7 +6,7 @@ interface ScheduleProps {}
 
 const Schedule: React.FC<ScheduleProps> = () => (
   <Layout>
-    <Text>Schedule</Text>
+    <Text>Schedule is TBD</Text>
   </Layout>
 );
 

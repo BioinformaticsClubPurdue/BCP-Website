@@ -1,7 +1,7 @@
 import React from 'react';
-import { HStack, Link as ChakraLink, Text } from '@chakra-ui/react';
+import { HStack, Link as ChakraLink, Text, Box } from '@chakra-ui/react';
 import { Link as GatsbyLink } from 'gatsby';
-import { StaticImage } from 'gatsby-plugin-image';
+import Icon from './Icon';
 
 interface NavLinkProps {
   text: string;
@@ -20,16 +20,13 @@ interface NavbarProps {
 }
 
 const Navbar: React.FC<NavbarProps> = ({ links }) => (
-  <HStack p={4} w="100%" bg="scheme.dark">
+  <HStack p={4} w="100%" bg="scheme.darker">
     <ChakraLink as={GatsbyLink} to="/">
       <HStack>
-        <StaticImage
-          src="../assets/placeholder_icon.png"
-          alt="Club icon"
-          height={30}
-          width={30}
-        />
-        <Text fontWeight="extrabold" paddingLeft={2}>
+        <Box maxW="30px">
+          <Icon />
+        </Box>
+        <Text fontWeight="extrabold" paddingLeft={1}>
           BIX @ Purdue
         </Text>
       </HStack>
