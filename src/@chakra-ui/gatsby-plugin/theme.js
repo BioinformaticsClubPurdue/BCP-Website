@@ -10,4 +10,11 @@ export default extendTheme({
     heading: 'Helvetica',
     body: 'Helvetica',
   },
+  styles: {
+    global: {
+      'html, body': {
+        scrollBehavior: 'smooth',
+      },
+    },
+  },
 });

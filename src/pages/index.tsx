@@ -4,10 +4,13 @@ import Layout from '../components/Layout';
 
 const Index: React.FC = () => (
   <Layout>
-    <Center>
-      <Text fontWeight="extrabold" fontSize="6xl">
+    <Center id="Home">
+      <Text fontWeight="extrabold" fontSize="6xl" height="1000px">
         Bioinformatics Club Purdue
       </Text>
+    </Center>
+    <Center id="Schedule">
+      <Text>Schedule</Text>
     </Center>
   </Layout>
 );

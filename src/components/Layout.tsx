@@ -8,12 +8,7 @@ interface LayoutProps {
 
 const Layout: React.FC<LayoutProps> = ({ children }) => (
   <>
-    <Navbar
-      items={[
-        ['Home', '/'],
-        ['Schedule', 'schedule'],
-      ]}
-    />
+    <Navbar items={['Home', 'Schedule']} />
     <Box>{children}</Box>
   </>
 );
