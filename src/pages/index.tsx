@@ -1,17 +1,10 @@
 import React from 'react';
-import { Text } from '@chakra-ui/react';
 import Layout from '../components/Layout';
+import Overview from '../components/Overview';
 
 const Index: React.FC = () => (
   <Layout>
-    <Text
-      fontWeight="extrabold"
-      fontSize="6xl"
-      height="1000px"
-      textAlign="center"
-    >
-      Bioinformatics Club Purdue
-    </Text>
+    <Overview />
   </Layout>
 );
 
