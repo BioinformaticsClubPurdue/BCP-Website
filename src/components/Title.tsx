@@ -2,10 +2,10 @@ import React from 'react';
 import { Text, Box } from '@chakra-ui/react';
 import Icon from './Icon';
 
-interface OverviewProps {}
+interface TitleProps {}
 
-const Overview: React.FC<OverviewProps> = () => (
-  <Box bg="scheme.dark" py="10" px="100" textAlign="center">
+const Title: React.FC<TitleProps> = () => (
+  <Box bg="scheme.dark" pt="175" pb="10" px="100" textAlign="center">
     <Box maxH="200px">
       <Icon />
     </Box>
@@ -15,4 +15,4 @@ const Overview: React.FC<OverviewProps> = () => (
   </Box>
 );
 
-export default Overview;
+export default Title;

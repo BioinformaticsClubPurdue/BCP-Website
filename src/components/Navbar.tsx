@@ -23,7 +23,7 @@ const Navbar: React.FC<NavbarProps> = ({ links }) => (
   <HStack pl="5" w="100%" bg="scheme.darker" spacing="7" color="white">
     <ChakraLink as={GatsbyLink} to="/">
       <HStack>
-        <Box maxW="30px">
+        <Box maxW="50px">
           <Icon />
         </Box>
         <Text fontWeight="extrabold" paddingLeft={1} align="center">
