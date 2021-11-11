@@ -4,8 +4,10 @@ import Layout from '../components/Layout';
 
 interface BlogProps {}
 
-const Blog: React.FC<BlogProps> = () => <Text>Blog is in progress</Text>;
-
-Blog.layout = Layout;
+const Blog: React.FC<BlogProps> = () => (
+  <Layout>
+    <Text>Blog is in progress</Text>
+  </Layout>
+);
 
 export default Blog;
