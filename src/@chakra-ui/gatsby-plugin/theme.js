@@ -11,7 +11,7 @@ export default extendTheme({
     },
   },
   fonts: {
-    heading: 'Helvetica',
-    body: 'Helvetica',
+    heading: 'Poppins',
+    body: 'Poppins',
   },
 });
