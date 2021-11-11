@@ -8,13 +8,13 @@ import Contact from '../components/Contact';
 interface IndexProps {}
 
 const Index: React.FC<IndexProps> = () => (
-  <Flex flexDirection="column">
-    <Overview />
-    <Details />
-    <Contact />
-  </Flex>
+  <Layout>
+    <Flex flexDirection="column">
+      <Overview />
+      <Details />
+      <Contact />
+    </Flex>
+  </Layout>
 );
-
-Index.layout = Layout;
 
 export default Index;
