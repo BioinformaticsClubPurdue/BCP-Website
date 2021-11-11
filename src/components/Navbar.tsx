@@ -20,14 +20,14 @@ interface NavbarProps {
 }
 
 const Navbar: React.FC<NavbarProps> = ({ links }) => (
-  <HStack p={4} w="100%" bg="scheme.darker">
+  <HStack pl="5" w="100%" bg="scheme.darker" spacing="7">
     <ChakraLink as={GatsbyLink} to="/">
       <HStack>
         <Box maxW="30px">
           <Icon />
         </Box>
-        <Text fontWeight="extrabold" paddingLeft={1}>
-          BIX @ Purdue
+        <Text fontWeight="extrabold" paddingLeft={1} align="center">
+          BDSBC @ Purdue
         </Text>
       </HStack>
     </ChakraLink>

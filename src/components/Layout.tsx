@@ -9,13 +9,13 @@ interface LayoutProps {
 const Layout: React.FC<LayoutProps> = ({ children }) => (
   <Grid
     templateRows="50px auto"
-    bg="scheme.dark"
+    bg="white"
     color="scheme.text"
     h="100vh"
     overflowY="auto"
   >
-    <Navbar links={['schedule']} />
-    <Box padding={5}>{children}</Box>
+    <Navbar links={['schedule', 'calendar']} />
+    <Box>{children}</Box>
   </Grid>
 );
 
