@@ -1,13 +1,11 @@
 import React from 'react';
-import { Text } from '@chakra-ui/react';
 import Layout from '../components/Layout';
+import EventList from '../components/EventList';
 
 interface ScheduleProps {}
 
-const Schedule: React.FC<ScheduleProps> = () => (
-  <Layout>
-    <Text>Schedule is TBD</Text>
-  </Layout>
-);
+const Schedule: React.FC<ScheduleProps> = () => <EventList />;
+
+Schedule.layout = Layout;
 
 export default Schedule;

@@ -8,7 +8,7 @@ interface NavLinkProps {
 }
 
 const NavLink: React.FC<NavLinkProps> = ({ text }) => (
-  <ChakraLink as={GatsbyLink} to={text} onClick={() => console.log('test')}>
+  <ChakraLink as={GatsbyLink} to={`/${text}`}>
     <Text fontWeight="medium">
       {text.charAt(0).toUpperCase() + text.slice(1)}
     </Text>
@@ -20,7 +20,7 @@ interface NavbarProps {
 }
 
 const Navbar: React.FC<NavbarProps> = ({ links }) => (
-  <HStack pl="5" w="100%" bg="scheme.darker" spacing="7">
+  <HStack pl="5" w="100%" bg="scheme.darker" spacing="7" color="white">
     <ChakraLink as={GatsbyLink} to="/">
       <HStack>
         <Box maxW="30px">
