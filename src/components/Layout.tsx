@@ -14,7 +14,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => (
     overflowY="auto"
     background="scheme.background"
   >
-    <Navbar links={['schedule', 'calendar']} />
+    <Navbar links={['schedule', 'blog']} />
     <Box>{children}</Box>
   </Grid>
 );
