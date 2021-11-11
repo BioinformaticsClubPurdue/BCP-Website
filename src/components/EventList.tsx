@@ -15,8 +15,9 @@ const Event: React.FC<EventProps> = ({ name, location, date, description }) => (
     bg="white"
     color="black"
     padding="4"
-    borderRadius="10px"
+    rounded="md"
     align="normal"
+    boxShadow="md"
   >
     <HStack>
       <FaCalendarAlt />
