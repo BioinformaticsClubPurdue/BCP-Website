@@ -5,6 +5,7 @@ export default extendTheme({
   colors: {
     scheme: {
       main: 'rebeccapurple',
+      main_light: '#855CAD',
       darker: '#20232a',
       dark: '#282c34',
       background: "#f5f5f5"

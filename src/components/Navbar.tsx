@@ -1,6 +1,15 @@
 import React from 'react';
-import { HStack, Link as ChakraLink, Text, Box } from '@chakra-ui/react';
+import {
+  Flex,
+  HStack,
+  Link as ChakraLink,
+  Text,
+  Box,
+  Spacer,
+  Button,
+} from '@chakra-ui/react';
 import { Link as GatsbyLink } from 'gatsby';
+import { FaSlack } from 'react-icons/fa';
 import Icon from './Icon';
 
 interface NavLinkProps {
@@ -8,7 +17,7 @@ interface NavLinkProps {
 }
 
 const NavLink: React.FC<NavLinkProps> = ({ text }) => (
-  <ChakraLink as={GatsbyLink} to={`/${text}`}>
+  <ChakraLink as={GatsbyLink} to={`/${text}`} pl="8">
     <Text fontWeight="medium">
       {text.charAt(0).toUpperCase() + text.slice(1)}
     </Text>
@@ -20,7 +29,7 @@ interface NavbarProps {
 }
 
 const Navbar: React.FC<NavbarProps> = ({ links }) => (
-  <HStack pl="5" w="100%" bg="scheme.darker" spacing="7" color="white">
+  <Flex px="5" w="100%" bg="scheme.darker" color="white" alignItems="center">
     <ChakraLink as={GatsbyLink} to="/">
       <HStack>
         <Box maxW="50px">
@@ -34,7 +43,21 @@ const Navbar: React.FC<NavbarProps> = ({ links }) => (
     {links.map((link: string) => (
       <NavLink text={link} key={link} />
     ))}
-  </HStack>
+    <Spacer />
+    <ChakraLink
+      href="https://join.slack.com/t/purduebioinformatics/signup"
+      isExternal
+    >
+      <Button
+        bg="scheme.main"
+        onHover
+        leftIcon={<FaSlack />}
+        _hover={{ bg: 'scheme.main_light' }}
+      >
+        Join our Slack!
+      </Button>
+    </ChakraLink>
+  </Flex>
 );
 
 export default Navbar;
