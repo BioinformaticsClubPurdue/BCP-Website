@@ -1,12 +1,14 @@
 import React from 'react';
-import { Text } from '@chakra-ui/react';
 import Layout from '../components/Layout';
+import SEO from '../components/SEO';
+import BlogList from '../components/BlogList';
 
 interface BlogProps {}
 
 const Blog: React.FC<BlogProps> = () => (
   <Layout>
-    <Text>Blog is in progress</Text>
+    <SEO title="Blog" />
+    <BlogList />
   </Layout>
 );
 
