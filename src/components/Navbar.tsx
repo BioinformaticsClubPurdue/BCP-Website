@@ -50,7 +50,6 @@ const Navbar: React.FC<NavbarProps> = ({ links }) => (
     >
       <Button
         bg="scheme.main"
-        onHover
         leftIcon={<FaSlack />}
         _hover={{ bg: 'scheme.main_light' }}
       >

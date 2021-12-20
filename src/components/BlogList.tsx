@@ -1,6 +1,6 @@
 import React from 'react';
-import { Text, VStack, Box } from '@chakra-ui/react';
-import { graphql, useStaticQuery } from 'gatsby';
+import { Text, VStack, Box, Link as ChakraLink } from '@chakra-ui/react';
+import { graphql, useStaticQuery, Link as GatsbyLink } from 'gatsby';
 
 export const blogQuery = graphql`
   query BlogQuery {
@@ -17,14 +17,19 @@ export const blogQuery = graphql`
   }
 `;
 
-interface BlogItemProps {
+interface FrontMatter {
   title: string;
   author: string;
   date: string;
 }
 
-const BlogItem: React.FC<BlogItemProps> = ({ title, author, date }) => (
-  <Box>{title + author}</Box>
+interface BlogPost {
+  frontmatter: FrontMatter;
+  id: string;
+}
+
+const BlogItem: React.FC<FrontMatter> = ({ title, author, date }) => (
+  <Box>{`${title} - ${author} (${date})`}</Box>
 );
 
 interface BlogListProps {}
@@ -32,18 +37,18 @@ interface BlogListProps {}
 const BlogList: React.FC<BlogListProps> = () => {
   const { blog } = useStaticQuery(blogQuery);
 
-  console.log(blog);
-
   return (
     <VStack>
       <Text fontSize="3xl">Blog Posts</Text>
-      {blog.posts.map((post) => (
-        <BlogItem
-          title={post.frontmatter.title}
-          key={post.frontmatter.id}
-          author={post.frontmatter.author}
-          date={post.frontmatter.date}
-        />
+      {blog.posts.map((post: BlogPost) => (
+        <ChakraLink as={GatsbyLink} to={`/${post.frontmatter.title}`}>
+          <BlogItem
+            title={post.frontmatter.title}
+            key={post.id}
+            author={post.frontmatter.author}
+            date={post.frontmatter.date}
+          />
+        </ChakraLink>
       ))}
     </VStack>
   );

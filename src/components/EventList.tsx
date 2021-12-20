@@ -1,7 +1,7 @@
 import React from 'react';
 import { Box, Text, HStack, Grid, VStack } from '@chakra-ui/react';
 import { FaMapMarkerAlt, FaCalendarAlt } from 'react-icons/fa';
-import eventsData from '../assets/sp22.json';
+import eventsData from '../../content/schedule/sp22.json';
 
 interface EventProps {
   name: string;
