@@ -7,24 +7,25 @@ module.exports = {
       resolve: 'gatsby-source-filesystem',
       options: {
         name: 'blog',
-        path: 'content/blog',
+        path: `${__dirname}/content/blog`,
       },
     },
     {
       resolve: 'gatsby-source-filesystem',
       options: {
         name: 'images',
-        path: 'content/images',
+        path: `${__dirname}/content/images`,
       },
     },
     {
       resolve: 'gatsby-source-filesystem',
       options: {
         name: 'schedule',
-        path: 'content/schedule',
+        path: `${__dirname}/content/schedule`,
       },
     },
     'gatsby-transformer-remark',
+    'gatsby-transformer-sharp',
   ],
   siteMetadata: {
     title: 'BDSBC Purdue',

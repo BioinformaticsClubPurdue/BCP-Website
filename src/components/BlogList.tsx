@@ -1,6 +1,8 @@
 import React from 'react';
-import { Text, VStack, Box, Link as ChakraLink } from '@chakra-ui/react';
+import { Text, VStack, Link as ChakraLink } from '@chakra-ui/react';
 import { graphql, useStaticQuery, Link as GatsbyLink } from 'gatsby';
+import ResponsiveGrid from './ResponsiveGrid';
+import { timeSince } from '../utils/timeSince';
 
 export const blogQuery = graphql`
   query BlogQuery {
@@ -12,24 +14,39 @@ export const blogQuery = graphql`
           title
         }
         id
+        excerpt
       }
     }
   }
 `;
 
-interface FrontMatter {
-  title: string;
-  author: string;
-  date: string;
-}
-
-interface BlogPost {
-  frontmatter: FrontMatter;
+interface BlogItemProps {
+  frontmatter: {
+    title: string;
+    author: string;
+    date: string;
+    banner: string;
+  };
   id: string;
+  excerpt: string;
 }
 
-const BlogItem: React.FC<FrontMatter> = ({ title, author, date }) => (
-  <Box>{`${title} - ${author} (${date})`}</Box>
+const BlogItem: React.FC<BlogItemProps> = ({ frontmatter, excerpt }) => (
+  <VStack
+    bg="white"
+    color="black"
+    padding="4"
+    rounded="md"
+    align="normal"
+    boxShadow="md"
+    spacing="1"
+  >
+    <Text fontWeight="extrabold" fontSize="2xl">
+      {`${frontmatter.title} (${timeSince(Date.parse(frontmatter.date))} ago)`}
+    </Text>
+    <Text>{frontmatter.author}</Text>
+    <Text paddingTop="5">{excerpt}</Text>
+  </VStack>
 );
 
 interface BlogListProps {}
@@ -38,18 +55,23 @@ const BlogList: React.FC<BlogListProps> = () => {
   const { blog } = useStaticQuery(blogQuery);
 
   return (
-    <VStack>
+    <VStack m={3}>
       <Text fontSize="3xl">Blog Posts</Text>
-      {blog.posts.map((post: BlogPost) => (
-        <ChakraLink as={GatsbyLink} to={`/${post.frontmatter.title}`}>
-          <BlogItem
-            title={post.frontmatter.title}
+      <ResponsiveGrid>
+        {blog.posts.map((post: BlogItemProps) => (
+          <ChakraLink
+            as={GatsbyLink}
+            to={`/${post.frontmatter.title}`}
             key={post.id}
-            author={post.frontmatter.author}
-            date={post.frontmatter.date}
-          />
-        </ChakraLink>
-      ))}
+          >
+            <BlogItem
+              frontmatter={post.frontmatter}
+              excerpt={post.excerpt}
+              id={post.id}
+            />
+          </ChakraLink>
+        ))}
+      </ResponsiveGrid>
     </VStack>
   );
 };

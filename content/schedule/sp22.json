@@ -10,5 +10,11 @@
     "location": "Purdue",
     "date": "01/30/22 6:00 PM",
     "description": "Placeholder event description"
+  },
+  {
+    "name": "Another Meeting",
+    "location": "Purdue",
+    "date": "12/20/21 8:00 PM",
+    "description": "Club meeting"
   }
 ]
