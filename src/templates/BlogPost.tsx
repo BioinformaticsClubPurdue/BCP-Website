@@ -1,11 +1,20 @@
 import React from 'react';
-import { Box, Text, VStack, Image as ChakraImage } from '@chakra-ui/react';
+import {
+  Box,
+  Text,
+  VStack,
+  Image as ChakraImage,
+  Code,
+} from '@chakra-ui/react';
 import { graphql } from 'gatsby';
 import { GatsbyImage, getImage } from 'gatsby-plugin-image';
 import ReactMarkdown from 'react-markdown';
 import ChakraUIRenderer from 'chakra-ui-markdown-renderer';
+import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
+import { vscDarkPlus } from 'react-syntax-highlighter/dist/esm/styles/prism';
 import Layout from '../components/Layout';
 import SEO from '../components/SEO';
+import style from 'react-syntax-highlighter/dist/esm/styles/hljs/a11y-dark';
 
 export const blogMarkdownQuery = graphql`
   query BlogMarkdownQuery($slug: String!) {
@@ -41,6 +50,20 @@ interface BlogPostProps {
   };
 }
 
+const markdownTheme = {
+  code({ children }) {
+    return (
+      <SyntaxHighlighter
+        language="javascript"
+        theme={vscDarkPlus}
+        wrapLongLines="true"
+      >
+        {children}
+      </SyntaxHighlighter>
+    );
+  },
+};
+
 const BlogPost: React.FC<BlogPostProps> = ({ data }) => {
   const image = getImage(data.markdownRemark.frontmatter.image);
 
@@ -57,12 +80,11 @@ const BlogPost: React.FC<BlogPostProps> = ({ data }) => {
           <Text fontWeight="extrabold" fontSize="5xl">
             {data.markdownRemark.frontmatter.title}
           </Text>
-          <Text color="grey">{`${data.markdownRemark.frontmatter.date} | ${
-            data.markdownRemark.timeToRead
-          } min${
+          <Text color="grey">{`${data.markdownRemark.frontmatter.author} | ${
+            data.markdownRemark.frontmatter.date
+          } | ${data.markdownRemark.timeToRead} min${
             data.markdownRemark.timeToRead === 1 ? '' : 's'
           } to read`}</Text>
-          <Text color="grey">{`By ${data.markdownRemark.frontmatter.author}`}</Text>
           <ChakraImage
             as={GatsbyImage}
             image={image!}
@@ -71,7 +93,7 @@ const BlogPost: React.FC<BlogPostProps> = ({ data }) => {
           />
         </VStack>
         <ReactMarkdown
-          components={ChakraUIRenderer()}
+          components={ChakraUIRenderer(markdownTheme)}
           // eslint-disable-next-line
           children={data.markdownRemark.rawMarkdownBody}
           skipHtml
