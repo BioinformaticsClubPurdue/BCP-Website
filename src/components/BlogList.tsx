@@ -1,6 +1,13 @@
 import React from 'react';
-import { Text, VStack, Link as ChakraLink } from '@chakra-ui/react';
+import {
+  Text,
+  VStack,
+  Link as ChakraLink,
+  Grid,
+  Image as ChakraImage,
+} from '@chakra-ui/react';
 import { graphql, useStaticQuery, Link as GatsbyLink } from 'gatsby';
+import { GatsbyImage, getImage } from 'gatsby-plugin-image';
 import ResponsiveGrid from './ResponsiveGrid';
 import { timeSince } from '../utils/timeSince';
 
@@ -12,6 +19,11 @@ export const blogQuery = graphql`
           author
           date
           title
+          image {
+            childImageSharp {
+              gatsbyImageData(placeholder: BLURRED, layout: FULL_WIDTH)
+            }
+          }
         }
         id
         excerpt
@@ -25,29 +37,44 @@ interface BlogItemProps {
     title: string;
     author: string;
     date: string;
-    banner: string;
+    image: any;
   };
   id: string;
   excerpt: string;
 }
 
-const BlogItem: React.FC<BlogItemProps> = ({ frontmatter, excerpt }) => (
-  <VStack
-    bg="white"
-    color="black"
-    padding="4"
-    rounded="md"
-    align="normal"
-    boxShadow="md"
-    spacing="1"
-  >
-    <Text fontWeight="extrabold" fontSize="2xl">
-      {`${frontmatter.title} (${timeSince(Date.parse(frontmatter.date))} ago)`}
-    </Text>
-    <Text>{frontmatter.author}</Text>
-    <Text paddingTop="5">{excerpt}</Text>
-  </VStack>
-);
+const BlogItem: React.FC<BlogItemProps> = ({ frontmatter, excerpt }) => {
+  const image = getImage(frontmatter.image);
+
+  return (
+    <Grid templateColumns="repeat(2, 1fr)">
+      <ChakraImage
+        as={GatsbyImage}
+        image={image!}
+        alt={frontmatter.title}
+        h="300px"
+        w="auto"
+      />
+      <VStack
+        bg="white"
+        color="black"
+        padding="4"
+        rounded="md"
+        align="normal"
+        boxShadow="md"
+        spacing="1"
+      >
+        <Text fontWeight="extrabold" fontSize="2xl">
+          {`${frontmatter.title} (${timeSince(
+            Date.parse(frontmatter.date)
+          )} ago)`}
+        </Text>
+        <Text>{frontmatter.author}</Text>
+        <Text paddingTop="5">{excerpt}</Text>
+      </VStack>
+    </Grid>
+  );
+};
 
 interface BlogListProps {}
 

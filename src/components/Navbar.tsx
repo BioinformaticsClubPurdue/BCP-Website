@@ -29,7 +29,14 @@ interface NavbarProps {
 }
 
 const Navbar: React.FC<NavbarProps> = ({ links }) => (
-  <Flex px="5" w="100%" bg="scheme.darker" color="white" alignItems="center">
+  <Flex
+    as="header"
+    px="5"
+    w="100%"
+    bg="scheme.darker"
+    color="white"
+    alignItems="center"
+  >
     <ChakraLink as={GatsbyLink} to="/">
       <HStack>
         <Box maxW="50px">

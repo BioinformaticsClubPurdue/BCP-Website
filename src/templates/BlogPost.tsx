@@ -1,11 +1,5 @@
 import React from 'react';
-import {
-  Box,
-  Text,
-  VStack,
-  Image as ChakraImage,
-  Code,
-} from '@chakra-ui/react';
+import { Box, Text, VStack, Image as ChakraImage } from '@chakra-ui/react';
 import { graphql } from 'gatsby';
 import { GatsbyImage, getImage } from 'gatsby-plugin-image';
 import ReactMarkdown from 'react-markdown';
@@ -14,7 +8,6 @@ import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { vscDarkPlus } from 'react-syntax-highlighter/dist/esm/styles/prism';
 import Layout from '../components/Layout';
 import SEO from '../components/SEO';
-import style from 'react-syntax-highlighter/dist/esm/styles/hljs/a11y-dark';
 
 export const blogMarkdownQuery = graphql`
   query BlogMarkdownQuery($slug: String!) {
