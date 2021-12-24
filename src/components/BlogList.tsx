@@ -8,7 +8,6 @@ import {
 } from '@chakra-ui/react';
 import { graphql, useStaticQuery, Link as GatsbyLink } from 'gatsby';
 import { GatsbyImage, getImage } from 'gatsby-plugin-image';
-import ResponsiveGrid from './ResponsiveGrid';
 import { timeSince } from '../utils/timeSince';
 
 export const blogQuery = graphql`
@@ -45,32 +44,33 @@ interface BlogItemProps {
 
 const BlogItem: React.FC<BlogItemProps> = ({ frontmatter, excerpt }) => {
   const image = getImage(frontmatter.image);
+  const dateString = `${timeSince(Date.parse(frontmatter.date))} ago`;
 
   return (
-    <Grid templateColumns="repeat(2, 1fr)">
+    <Grid templateRows="4, 1">
       <ChakraImage
         as={GatsbyImage}
         image={image!}
         alt={frontmatter.title}
-        h="300px"
-        w="auto"
+        height="250px"
+        roundedTop="md"
       />
       <VStack
         bg="white"
-        color="black"
         padding="4"
-        rounded="md"
+        roundedBottom="md"
         align="normal"
         boxShadow="md"
         spacing="1"
+        height="100%"
       >
         <Text fontWeight="extrabold" fontSize="2xl">
-          {`${frontmatter.title} (${timeSince(
-            Date.parse(frontmatter.date)
-          )} ago)`}
+          {frontmatter.title}
         </Text>
-        <Text>{frontmatter.author}</Text>
-        <Text paddingTop="5">{excerpt}</Text>
+        <Text>{`${frontmatter.author} (${dateString})`}</Text>
+        <Text paddingTop="5" color="gray.600">
+          {excerpt}
+        </Text>
       </VStack>
     </Grid>
   );
@@ -84,7 +84,17 @@ const BlogList: React.FC<BlogListProps> = () => {
   return (
     <VStack m={3}>
       <Text fontSize="3xl">Blog Posts</Text>
-      <ResponsiveGrid>
+      <Grid
+        templateColumns={[
+          'repeat(1, 1fr)',
+          'repeat(1, 1fr)',
+          'repeat(2, 1fr)',
+          'repeat(2, 1fr)',
+          'repeat(3, 1fr)',
+        ]}
+        gap="10"
+        width="100%"
+      >
         {blog.posts.map((post: BlogItemProps) => (
           <ChakraLink
             as={GatsbyLink}
@@ -98,7 +108,7 @@ const BlogList: React.FC<BlogListProps> = () => {
             />
           </ChakraLink>
         ))}
-      </ResponsiveGrid>
+      </Grid>
     </VStack>
   );
 };
