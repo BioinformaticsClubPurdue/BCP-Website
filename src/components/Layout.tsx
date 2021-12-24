@@ -11,11 +11,11 @@ const Layout: React.FC<LayoutProps> = ({ children }) => (
     templateRows="50px auto"
     bg="white"
     h="100vh"
-    w="100vw"
     overflowY="auto"
+    overflowX="auto"
     background="scheme.background"
   >
-    <Navbar links={['schedule', 'blog']} />
+    <Navbar links={['contact', 'schedule', 'blog']} />
     <main>{children}</main>
   </Grid>
 );

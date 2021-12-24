@@ -16,20 +16,19 @@ const query = graphql`
 
 interface SEOProps {
   title: string;
-  description: string;
 }
 
-const SEO: React.FC<SEOProps> = ({ title, description }) => {
+const SEO: React.FC<SEOProps> = ({ title }) => {
   const { site } = useStaticQuery(query);
 
-  const { defaultTitle, defaultDescription } = site.siteMetadata;
+  const { defaultTitle } = site.siteMetadata;
 
   const fullTitle = title ? `${title} | ${defaultTitle}` : defaultTitle;
 
   return (
     <Helmet title={fullTitle}>
       <html lang="en" />
-      <meta name="description" content={description ?? defaultDescription} />
+      <meta name="description" content={site.description} />
       <link rel="icon" href={favicon} />
     </Helmet>
   );

@@ -1,41 +1,132 @@
 import React from 'react';
-import { Text, VStack, UnorderedList, ListItem, Box } from '@chakra-ui/react';
+import {
+  Text,
+  VStack,
+  Box,
+  Link as ChakraLink,
+  HStack,
+  StackDivider,
+  Icon,
+  useMediaQuery,
+  Stack,
+} from '@chakra-ui/react';
+import { Link as GatsbyLink } from 'gatsby';
+import {
+  FaTable,
+  FaCode,
+  FaChalkboardTeacher,
+  FaSpotify,
+  FaNewspaper,
+} from 'react-icons/fa';
+import { IconType } from 'react-icons';
+
+interface IconDividersItemProps {
+  text: string;
+  icon: IconType;
+  link?: string;
+}
+
+const IconDividersItem: React.FC<IconDividersItemProps> = ({
+  text,
+  icon,
+  link,
+}) => {
+  if (link) {
+    return (
+      <ChakraLink as={GatsbyLink} to={link}>
+        <HStack>
+          <Icon as={icon} />
+          <Text>{text}</Text>
+        </HStack>
+      </ChakraLink>
+    );
+  }
+  return (
+    <HStack>
+      <Icon as={icon} />
+      <Text>{text}</Text>
+    </HStack>
+  );
+};
+
+interface IconDividersProps {
+  items: IconDividersItemProps[];
+}
+
+const IconDividers: React.FC<IconDividersProps> = ({ items }) => {
+  const [useHStack] = useMediaQuery('(min-width: 700px)');
+
+  return (
+    <Stack
+      direction={useHStack ? 'row' : 'column'}
+      divider={<StackDivider />}
+      width="100%"
+    >
+      {items.map((item: IconDividersItemProps) => (
+        <IconDividersItem text={item.text} icon={item.icon} link={item.link} />
+      ))}
+    </Stack>
+  );
+};
 
 interface DetailsProps {}
 
 const Details: React.FC<DetailsProps> = () => (
-  <VStack py="10" px="40" spacing="10" fontSize="2xl">
-    {/* <HStack>
-      <FaTable size="40px" />
-      <FaDna size="40px" />
-      <FaCode size="40px" />
-    </HStack>
-    <Text fontSize="3xl">
-      Interested in data science, biology, or programming?
-    </Text> */}
+  <VStack
+    py="10"
+    spacing="20"
+    fontSize="2xl"
+    width={['95%', '75%', '55%']}
+    margin="auto"
+  >
     <Box>
-      <Text mb="1">
-        The BDSBC at Purdue is for students that are interested in the
-        intersection between data science and biology, used to solve modern
-        medical challenges. Our goal is to provide educational and professional
-        development in our club through:
-      </Text>
-      <UnorderedList>
-        <ListItem>Progress through online Datacamp courses together</ListItem>
-        <ListItem>Presentations from professionals in the field</ListItem>
-        <ListItem>Practice coding exercises</ListItem>
-      </UnorderedList>
-    </Box>
-    <Box width="100%">
       <Text>
-        We also produce content aimed to achieve our goal. This includes:
+        In BDSBC at Purdue, we are interested in the intersection between Data
+        Science and Biology. Our goal is to develop academically and
+        professionally through:
       </Text>
-      <UnorderedList>
-        <ListItem>
-          Spotify podcasts made by our members about bioinformatics
-        </ListItem>
-        <ListItem>Tutorial blogs on various bioinformatics exercises</ListItem>
-      </UnorderedList>
+      <IconDividers
+        items={[
+          {
+            text: 'Working Through Datacamp Courses',
+            icon: FaTable,
+          },
+          {
+            text: 'Talks From Professionals In the Field',
+            icon: FaChalkboardTeacher,
+          },
+          {
+            text: 'Programming Exercises and Contests',
+            icon: FaCode,
+          },
+        ]}
+      />
+    </Box>
+    <Box>
+      <Text>
+        Interested?{' '}
+        <ChakraLink
+          as={GatsbyLink}
+          to="https://join.slack.com/t/purduebioinformatics/signup"
+        >
+          Join our Slack!
+        </ChakraLink>{' '}
+        You may also enjoy the following content that we create:
+      </Text>
+      <IconDividers
+        items={[
+          {
+            text: 'Spotify Podcasts with Professionals in the Field',
+            icon: FaSpotify,
+            link: '/contact',
+          },
+          {
+            text: 'Online Tutorials About Bioinformatics',
+            icon: FaNewspaper,
+            link: '/blog',
+          },
+        ]}
+      />
     </Box>
   </VStack>
 );

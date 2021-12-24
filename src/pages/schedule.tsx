@@ -12,6 +12,4 @@ const Schedule: React.FC<ScheduleProps> = () => (
   </Layout>
 );
 
-Schedule.layout = Layout;
-
 export default Schedule;
