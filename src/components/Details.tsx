@@ -63,7 +63,12 @@ const IconDividers: React.FC<IconDividersProps> = ({ items }) => {
       width="100%"
     >
       {items.map((item: IconDividersItemProps) => (
-        <IconDividersItem text={item.text} icon={item.icon} link={item.link} />
+        <IconDividersItem
+          text={item.text}
+          icon={item.icon}
+          link={item.link}
+          key={item.text}
+        />
       ))}
     </Stack>
   );
@@ -106,8 +111,8 @@ const Details: React.FC<DetailsProps> = () => (
       <Text>
         Interested?{' '}
         <ChakraLink
-          as={GatsbyLink}
-          to="https://join.slack.com/t/purduebioinformatics/signup"
+          href="https://join.slack.com/t/purduebioinformatics/signup"
+          isExternal
         >
           Join our Slack!
         </ChakraLink>{' '}
