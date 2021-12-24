@@ -10,29 +10,6 @@ import { graphql, useStaticQuery, Link as GatsbyLink } from 'gatsby';
 import { GatsbyImage, getImage } from 'gatsby-plugin-image';
 import { timeSince } from '../utils/timeSince';
 
-export const blogQuery = graphql`
-  query BlogQuery {
-    blog: allMarkdownRemark(
-      sort: { fields: [frontmatter___date], order: DESC }
-    ) {
-      posts: nodes {
-        frontmatter {
-          author
-          date
-          title
-          image {
-            childImageSharp {
-              gatsbyImageData(placeholder: BLURRED, layout: FULL_WIDTH)
-            }
-          }
-        }
-        id
-        excerpt
-      }
-    }
-  }
-`;
-
 interface BlogItemProps {
   frontmatter: {
     title: string;
@@ -78,10 +55,39 @@ const BlogItem: React.FC<BlogItemProps> = ({ frontmatter, excerpt }) => {
   );
 };
 
+interface BlogQueryType {
+  blog: {
+    posts: BlogItemProps[];
+  };
+}
+
+export const blogQuery = graphql`
+  query BlogQuery {
+    blog: allMarkdownRemark(
+      sort: { fields: [frontmatter___date], order: DESC }
+    ) {
+      posts: nodes {
+        frontmatter {
+          author
+          date
+          title
+          image {
+            childImageSharp {
+              gatsbyImageData(placeholder: BLURRED, layout: FULL_WIDTH)
+            }
+          }
+        }
+        id
+        excerpt
+      }
+    }
+  }
+`;
+
 interface BlogListProps {}
 
 const BlogList: React.FC<BlogListProps> = () => {
-  const { blog } = useStaticQuery(blogQuery);
+  const { blog } = useStaticQuery<BlogQueryType>(blogQuery);
 
   return (
     <VStack m={3}>

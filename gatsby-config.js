@@ -20,12 +20,13 @@ module.exports = {
     {
       resolve: 'gatsby-source-filesystem',
       options: {
-        name: 'schedule',
-        path: `${__dirname}/content/schedule`,
+        name: 'json',
+        path: `${__dirname}/content/json`,
       },
     },
     'gatsby-transformer-remark',
     'gatsby-transformer-sharp',
+    'gatsby-transformer-json',
   ],
   siteMetadata: {
     title: 'BDSBC Purdue',
