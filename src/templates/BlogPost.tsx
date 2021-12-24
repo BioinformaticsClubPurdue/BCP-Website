@@ -58,11 +58,19 @@ const markdownTheme = {
 };
 
 const BlogPost: React.FC<BlogPostProps> = ({ data }) => {
-  const image = getImage(data.markdownRemark.frontmatter.image);
+  const { frontmatter, timeToRead, rawMarkdownBody } = data.markdownRemark;
+  const image = getImage(frontmatter.image);
+
+  const dateTimeParts = frontmatter.date.slice(0, -1).split('T');
+  const dateString = dateTimeParts[0];
+
+  const timeToReadString = `${timeToRead} min${
+    timeToRead === 1 ? '' : 's'
+  } to read`;
 
   return (
     <Layout>
-      <SEO title={data.markdownRemark.frontmatter.title} description="" />
+      <SEO title={frontmatter.title} />
       <Box
         width={['95%', '75%', '55%']}
         margin="auto"
@@ -71,24 +79,20 @@ const BlogPost: React.FC<BlogPostProps> = ({ data }) => {
       >
         <VStack spacing="2" py="10">
           <Text fontWeight="extrabold" fontSize="5xl">
-            {data.markdownRemark.frontmatter.title}
+            {frontmatter.title}
           </Text>
-          <Text color="grey">{`${data.markdownRemark.frontmatter.author} | ${
-            data.markdownRemark.frontmatter.date
-          } | ${data.markdownRemark.timeToRead} min${
-            data.markdownRemark.timeToRead === 1 ? '' : 's'
-          } to read`}</Text>
+          <Text color="grey">{`${frontmatter.author} | ${dateString} | ${timeToReadString}`}</Text>
           <ChakraImage
             as={GatsbyImage}
             image={image!}
-            alt={data.markdownRemark.frontmatter.title}
+            alt={frontmatter.title}
             width="100%"
           />
         </VStack>
         <ReactMarkdown
           components={ChakraUIRenderer(markdownTheme)}
           // eslint-disable-next-line
-          children={data.markdownRemark.rawMarkdownBody}
+          children={rawMarkdownBody}
           skipHtml
         />
       </Box>

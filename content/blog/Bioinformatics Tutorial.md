@@ -1,7 +1,7 @@
 ---
 title: Bioinformatics Tutorial
 author: Will Forman
-date: 12/24/2021
+date: 2021-12-24T18:34:28+0000
 image: ../images/blog-images/bioinformatics.jpeg
 ---
 

@@ -1,7 +1,7 @@
 ---
 title: Second Blog Post
 author: Will Forman
-date: 12/19/2021
+date: 2021-12-19T18:34:28+0000
 image: ../images/blog-images/bio.jpeg
 ---
 

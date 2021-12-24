@@ -12,7 +12,9 @@ import { timeSince } from '../utils/timeSince';
 
 export const blogQuery = graphql`
   query BlogQuery {
-    blog: allMarkdownRemark {
+    blog: allMarkdownRemark(
+      sort: { fields: [frontmatter___date], order: DESC }
+    ) {
       posts: nodes {
         frontmatter {
           author
