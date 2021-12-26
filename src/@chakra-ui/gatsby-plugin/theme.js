@@ -8,7 +8,8 @@ export default extendTheme({
       main_light: '#855CAD',
       darker: '#20232a',
       dark: '#282c34',
-      background: "#f5f5f5"
+      background: '#fafbfc',
+      code: '#1e1e1e',
     },
   },
   fonts: {

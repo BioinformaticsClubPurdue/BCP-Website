@@ -7,13 +7,29 @@ module.exports = {
       resolve: 'gatsby-source-filesystem',
       options: {
         name: 'blog',
-        path: 'blog',
-      }
+        path: `${__dirname}/content/blog`,
+      },
     },
-    'gatsby-transformer-remark'
+    {
+      resolve: 'gatsby-source-filesystem',
+      options: {
+        name: 'images',
+        path: `${__dirname}/content/images`,
+      },
+    },
+    {
+      resolve: 'gatsby-source-filesystem',
+      options: {
+        name: 'json',
+        path: `${__dirname}/content/json`,
+      },
+    },
+    'gatsby-transformer-remark',
+    'gatsby-transformer-sharp',
+    'gatsby-transformer-json',
   ],
   siteMetadata: {
-      title: 'BDSBC Purdue',
-      description: 'Biomedical Data Science and Bioinformatics Club at Purdue',
-  }
+    title: 'BDSBC Purdue',
+    description: 'Biomedical Data Science and Bioinformatics Club at Purdue',
+  },
 };
