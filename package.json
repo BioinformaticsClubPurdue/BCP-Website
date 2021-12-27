@@ -14,6 +14,7 @@
     "@emotion/react": "^11.4.1",
     "@emotion/styled": "^11.3.0",
     "@fontsource/poppins": "^4.5.0",
+    "@rafaelquintanilha/gatsby-transformer-ipynb": "^0.2.0",
     "chakra-ui-markdown-renderer": "^4.0.0",
     "focus-visible": "^5.2.0",
     "framer-motion": "^5.3.3",
