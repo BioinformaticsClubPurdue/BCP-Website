@@ -6,6 +6,7 @@ import ReactMarkdown from 'react-markdown';
 import ChakraUIRenderer from 'chakra-ui-markdown-renderer';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { vscDarkPlus } from 'react-syntax-highlighter/dist/esm/styles/prism';
+import 'katex/dist/katex.min.css';
 import Layout from '../components/Layout';
 import SEO from '../components/SEO';
 
@@ -71,14 +72,9 @@ const BlogPost: React.FC<BlogPostProps> = ({ data }) => {
   return (
     <Layout>
       <SEO title={frontmatter.title} />
-      <Box
-        width={['95%', '75%', '55%']}
-        margin="auto"
-        textAlign="center"
-        py="20"
-      >
+      <Box width={['95%', '75%', '55%']} margin="auto" py="20">
         <VStack spacing="2" py="10">
-          <Text fontWeight="extrabold" fontSize="5xl">
+          <Text fontWeight="extrabold" fontSize="5xl" textAlign="center">
             {frontmatter.title}
           </Text>
           <Text color="grey">{`${frontmatter.author} | ${dateString} | ${timeToReadString}`}</Text>
@@ -89,12 +85,14 @@ const BlogPost: React.FC<BlogPostProps> = ({ data }) => {
             width="100%"
           />
         </VStack>
-        <ReactMarkdown
-          components={ChakraUIRenderer(markdownTheme)}
-          // eslint-disable-next-line
-          children={rawMarkdownBody}
-          skipHtml
-        />
+        <Box fontSize="lg">
+          <ReactMarkdown
+            components={ChakraUIRenderer(markdownTheme)}
+            // eslint-disable-next-line
+            children={rawMarkdownBody}
+            skipHtml
+          />
+        </Box>
       </Box>
     </Layout>
   );

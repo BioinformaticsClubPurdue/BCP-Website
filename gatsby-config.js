@@ -2,12 +2,11 @@ module.exports = {
   plugins: [
     '@chakra-ui/gatsby-plugin',
     'gatsby-plugin-image',
-    'gatsby-plugin-sharp',
     {
       resolve: 'gatsby-source-filesystem',
       options: {
-        name: 'markdown',
-        path: `${__dirname}/content/markdown`,
+        name: 'blog',
+        path: `${__dirname}/content/blog`,
       },
     },
     {
@@ -24,9 +23,33 @@ module.exports = {
         path: `${__dirname}/content/json`,
       },
     },
-    'gatsby-transformer-remark',
-    'gatsby-transformer-sharp',
+    {
+      resolve: 'gatsby-source-filesystem',
+      options: {
+        name: 'pages',
+        path: `${__dirname}/src/pages`,
+      },
+    },
+    {
+      resolve: `gatsby-transformer-remark`,
+      options: {
+        plugins: [
+          {
+            resolve: `gatsby-remark-images`,
+            options: {
+              // It's important to specify the maxWidth (in pixels) of
+              // the content container as this plugin uses this as the
+              // base for generating different widths of each image.
+              maxWidth: 590,
+            },
+          },
+        ],
+      },
+    },
     'gatsby-transformer-json',
+    'gatsby-transformer-sharp',
+    'gatsby-plugin-sharp',
+    'gatsby-plugin-react-helmet',
   ],
   siteMetadata: {
     title: 'BDSBC Purdue',

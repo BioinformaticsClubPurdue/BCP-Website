@@ -1,8 +1,8 @@
 ---
-title: Bioinformatics Tutorial
+title: Bioinformatics
 author: Will Forman
 date: 2021-12-24T18:34:28+0000
-image: ../images/blog-images/bioinformatics.jpeg
+image: ./bioinformatics.jpeg
 ---
 
 Bioinformatics (/ˌbaɪ.oʊˌɪnfərˈmætɪks/) is an interdisciplinary field that develops methods and software tools for understanding biological data, in particular when the data sets are large and complex. As an interdisciplinary field of science, bioinformatics combines biology, chemistry, physics, computer science, information engineering, mathematics and statistics to analyze and interpret the biological data. Bioinformatics has been used for in silico analyses of biological queries using mathematical and statistical techniques.[clarification needed]
