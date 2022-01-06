@@ -13,21 +13,14 @@ module.exports = {
       resolve: 'gatsby-source-filesystem',
       options: {
         name: 'images',
-        path: `${__dirname}/content/images`,
+        path: `${__dirname}/src/images`,
       },
     },
     {
       resolve: 'gatsby-source-filesystem',
       options: {
-        name: 'json',
-        path: `${__dirname}/content/json`,
-      },
-    },
-    {
-      resolve: 'gatsby-source-filesystem',
-      options: {
-        name: 'pages',
-        path: `${__dirname}/src/pages`,
+        name: 'schedule',
+        path: `${__dirname}/content/schedule`,
       },
     },
     {
@@ -37,19 +30,15 @@ module.exports = {
           {
             resolve: `gatsby-remark-images`,
             options: {
-              // It's important to specify the maxWidth (in pixels) of
-              // the content container as this plugin uses this as the
-              // base for generating different widths of each image.
-              maxWidth: 590,
+              maxWidth: 630,
             },
           },
         ],
       },
     },
-    'gatsby-transformer-json',
     'gatsby-transformer-sharp',
     'gatsby-plugin-sharp',
-    'gatsby-plugin-react-helmet',
+    'gatsby-transformer-json',
   ],
   siteMetadata: {
     title: 'BDSBC Purdue',

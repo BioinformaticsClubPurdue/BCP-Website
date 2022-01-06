@@ -2,7 +2,7 @@
 title: Implementing K-Nearest Neighbors From Scratch In Python
 author: Will Forman
 date: 2021-12-26T18:34:28+0000
-image: ./Classification_Model.png
+image: ./classification_model.png
 ---
 
 Imagine you had a group of dogs and cats. You weighed each animal and noted the color of their fur, and put all the data in a table. Would you be able to create a model, that given these parameters, could decide if the row was a dog or a cat?
@@ -19,7 +19,7 @@ There is a [famous dataset from the University of Wisconsin](<https://archive.ic
 
 The K-Nearest Neighbors model is an simple and intuitive model to classify a point. The idea behind it is that similar categories are close together in proximity. We can visualize this with a graph where we know some data points already and which class they belong to:
 
-![Distribution of two classes](./Classification_Model.png)
+![Distribution of two classes](./classification_model.png)
 
 As you can see, points above the model belong to Class 1, and below to Class 2. Of course, in a real data science problem, we won't have this ideal model, so we have to guess some other way.
 
@@ -31,7 +31,7 @@ Given a point $p$ at $(a,b)$, we can do the following:
 
 We can visualize this by drawing a very small circle around the point, and expanding it until it surrounds $k$ other points. The following shows that example when $k=3$ and $p$ is at $(50, 50)$:
 
-![K-Nearest Neighbors Visualization](./KNN_model.png)
+![K-Nearest Neighbors Visualization](./knn_model.png)
 
 Therefore, in this example, $p$ would belong to Class 1. This is easy to do on a graph, but we need a way to calculate the distance between two points. How will we do it?
 
