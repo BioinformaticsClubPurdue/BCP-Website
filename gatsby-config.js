@@ -33,6 +33,8 @@ module.exports = {
               maxWidth: 630,
             },
           },
+          `gatsby-remark-prismjs`,
+          'gatsby-remark-katex',
         ],
       },
     },
