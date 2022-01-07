@@ -2,8 +2,6 @@ import React from 'react';
 import { Box, Text, VStack, Image as ChakraImage } from '@chakra-ui/react';
 import { graphql } from 'gatsby';
 import { GatsbyImage, getImage } from 'gatsby-plugin-image';
-import ReactMarkdown from 'react-markdown';
-import ChakraUIRenderer from 'chakra-ui-markdown-renderer';
 import 'katex/dist/katex.min.css';
 import Layout from '../components/Layout';
 import SEO from '../components/SEO';
@@ -69,7 +67,54 @@ const BlogPost: React.FC<BlogPostProps> = ({ data }) => {
             width="100%"
           />
         </VStack>
-        <Box fontSize="lg" dangerouslySetInnerHTML={{ __html: html }} />
+        <Box
+          maxWidth="100%"
+          fontSize="lg"
+          dangerouslySetInnerHTML={{ __html: html }}
+          overflowX="auto"
+          sx={{
+            p: {
+              paddingTop: '3',
+              paddingBottom: '3',
+            },
+            h1: {
+              fontSize: '2.5em',
+              fontWeight: 'bold',
+              marginTop: '0.67em',
+              marginBottom: '0.67em',
+            },
+            h2: {
+              fontSize: '2em',
+              fontWeight: 'bold',
+              marginTop: '0.83em',
+              marginBottom: '0.83em',
+            },
+            h3: {
+              fontSize: '1.83em',
+              fontWeight: 'bold',
+              marginTop: '1em',
+              marginBottom: '1em',
+            },
+            h4: {
+              fontSize: '1.5em',
+              fontWeight: 'bold',
+              marginTop: '1.33em',
+              marginBottom: '1.33em',
+            },
+            h5: {
+              fontSize: '1.33em',
+              fontWeight: 'bold',
+              marginTop: '1.67em',
+              marginBottom: '1.67em',
+            },
+            h6: {
+              fontSize: '1.17em',
+              fontWeight: 'bold',
+              marginTop: '2.33em',
+              marginBottom: '2.33em',
+            },
+          }}
+        />
       </Box>
     </Layout>
   );
