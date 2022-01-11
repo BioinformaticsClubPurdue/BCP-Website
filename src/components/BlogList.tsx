@@ -19,6 +19,9 @@ interface BlogItemProps {
   };
   id: string;
   excerpt: string;
+  fields: {
+    slug: string;
+  };
 }
 
 const BlogItem: React.FC<BlogItemProps> = ({ frontmatter, excerpt }) => {
@@ -61,7 +64,7 @@ interface BlogQueryType {
   };
 }
 
-export const blogQuery = graphql`
+const blogQuery = graphql`
   query BlogQuery {
     blog: allMarkdownRemark(
       sort: { fields: [frontmatter___date], order: DESC }
@@ -76,6 +79,9 @@ export const blogQuery = graphql`
               gatsbyImageData(placeholder: BLURRED, layout: FULL_WIDTH)
             }
           }
+        }
+        fields {
+          slug
         }
         id
         excerpt
@@ -104,15 +110,12 @@ const BlogList: React.FC<BlogListProps> = () => {
         width="100%"
       >
         {blog.posts.map((post: BlogItemProps) => (
-          <ChakraLink
-            as={GatsbyLink}
-            to={`/${post.frontmatter.title}`}
-            key={post.id}
-          >
+          <ChakraLink as={GatsbyLink} to={`/${post.fields.slug}`} key={post.id}>
             <BlogItem
               frontmatter={post.frontmatter}
               excerpt={post.excerpt}
               id={post.id}
+              fields={post.fields}
             />
           </ChakraLink>
         ))}

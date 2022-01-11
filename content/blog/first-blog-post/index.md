@@ -2,7 +2,7 @@
 title: First Blog Post
 author: Will Forman
 date: 2020-12-30T18:34:28+0000
-image: ../images/blog-images/galaxy.png
+image: ./galaxy.png
 ---
 
 ## Intro

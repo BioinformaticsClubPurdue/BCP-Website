@@ -2,30 +2,44 @@ module.exports = {
   plugins: [
     '@chakra-ui/gatsby-plugin',
     'gatsby-plugin-image',
-    'gatsby-plugin-sharp',
     {
       resolve: 'gatsby-source-filesystem',
       options: {
-        name: 'markdown',
-        path: `${__dirname}/content/markdown`,
+        name: 'blog',
+        path: `${__dirname}/content/blog`,
       },
     },
     {
       resolve: 'gatsby-source-filesystem',
       options: {
         name: 'images',
-        path: `${__dirname}/content/images`,
+        path: `${__dirname}/src/images`,
       },
     },
     {
       resolve: 'gatsby-source-filesystem',
       options: {
-        name: 'json',
-        path: `${__dirname}/content/json`,
+        name: 'schedule',
+        path: `${__dirname}/content/schedule`,
       },
     },
-    'gatsby-transformer-remark',
+    {
+      resolve: `gatsby-transformer-remark`,
+      options: {
+        plugins: [
+          {
+            resolve: `gatsby-remark-images`,
+            options: {
+              maxWidth: 630,
+            },
+          },
+          `gatsby-remark-prismjs`,
+          'gatsby-remark-katex',
+        ],
+      },
+    },
     'gatsby-transformer-sharp',
+    'gatsby-plugin-sharp',
     'gatsby-transformer-json',
   ],
   siteMetadata: {

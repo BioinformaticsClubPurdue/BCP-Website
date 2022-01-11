@@ -2,10 +2,7 @@ import React from 'react';
 import { Box, Text, VStack, Image as ChakraImage } from '@chakra-ui/react';
 import { graphql } from 'gatsby';
 import { GatsbyImage, getImage } from 'gatsby-plugin-image';
-import ReactMarkdown from 'react-markdown';
-import ChakraUIRenderer from 'chakra-ui-markdown-renderer';
-import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
-import { vscDarkPlus } from 'react-syntax-highlighter/dist/esm/styles/prism';
+import 'katex/dist/katex.min.css';
 import Layout from '../components/Layout';
 import SEO from '../components/SEO';
 
@@ -22,7 +19,7 @@ export const blogMarkdownQuery = graphql`
           }
         }
       }
-      rawMarkdownBody
+      html
       timeToRead
     }
   }
@@ -37,28 +34,14 @@ interface BlogPostProps {
         author: string;
         image: any;
       };
-      rawMarkdownBody: string;
+      html: string;
       timeToRead: number;
     };
   };
 }
 
-const markdownTheme = {
-  code({ children }) {
-    return (
-      <SyntaxHighlighter
-        language="javascript"
-        theme={vscDarkPlus}
-        wrapLongLines="true"
-      >
-        {children}
-      </SyntaxHighlighter>
-    );
-  },
-};
-
 const BlogPost: React.FC<BlogPostProps> = ({ data }) => {
-  const { frontmatter, timeToRead, rawMarkdownBody } = data.markdownRemark;
+  const { frontmatter, timeToRead, html } = data.markdownRemark;
   const image = getImage(frontmatter.image);
 
   const dateTimeParts = frontmatter.date.slice(0, -1).split('T');
@@ -71,14 +54,9 @@ const BlogPost: React.FC<BlogPostProps> = ({ data }) => {
   return (
     <Layout>
       <SEO title={frontmatter.title} />
-      <Box
-        width={['95%', '75%', '55%']}
-        margin="auto"
-        textAlign="center"
-        py="20"
-      >
+      <Box width={['95%', '75%', '55%']} margin="auto" py="20">
         <VStack spacing="2" py="10">
-          <Text fontWeight="extrabold" fontSize="5xl">
+          <Text fontWeight="extrabold" fontSize="5xl" textAlign="center">
             {frontmatter.title}
           </Text>
           <Text color="grey">{`${frontmatter.author} | ${dateString} | ${timeToReadString}`}</Text>
@@ -89,11 +67,53 @@ const BlogPost: React.FC<BlogPostProps> = ({ data }) => {
             width="100%"
           />
         </VStack>
-        <ReactMarkdown
-          components={ChakraUIRenderer(markdownTheme)}
-          // eslint-disable-next-line
-          children={rawMarkdownBody}
-          skipHtml
+        <Box
+          maxWidth="100%"
+          fontSize="lg"
+          dangerouslySetInnerHTML={{ __html: html }}
+          overflowX="auto"
+          sx={{
+            p: {
+              paddingTop: '3',
+              paddingBottom: '3',
+            },
+            h1: {
+              fontSize: '2.5em',
+              fontWeight: 'bold',
+              marginTop: '0.67em',
+              marginBottom: '0.67em',
+            },
+            h2: {
+              fontSize: '2em',
+              fontWeight: 'bold',
+              marginTop: '0.83em',
+              marginBottom: '0.83em',
+            },
+            h3: {
+              fontSize: '1.83em',
+              fontWeight: 'bold',
+              marginTop: '1em',
+              marginBottom: '1em',
+            },
+            h4: {
+              fontSize: '1.5em',
+              fontWeight: 'bold',
+              marginTop: '1.33em',
+              marginBottom: '1.33em',
+            },
+            h5: {
+              fontSize: '1.33em',
+              fontWeight: 'bold',
+              marginTop: '1.67em',
+              marginBottom: '1.67em',
+            },
+            h6: {
+              fontSize: '1.17em',
+              fontWeight: 'bold',
+              marginTop: '2.33em',
+              marginBottom: '2.33em',
+            },
+          }}
         />
       </Box>
     </Layout>

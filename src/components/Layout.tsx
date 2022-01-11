@@ -9,7 +9,7 @@ interface LayoutProps {
 const Layout: React.FC<LayoutProps> = ({ children }) => (
   <Grid
     templateRows="50px auto"
-    h="100vh"
+    minH="100vh"
     overflowY="auto"
     overflowX="auto"
     background="scheme.background"
