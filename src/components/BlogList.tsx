@@ -8,7 +8,7 @@ import {
 } from '@chakra-ui/react';
 import { graphql, useStaticQuery, Link as GatsbyLink } from 'gatsby';
 import { GatsbyImage, getImage } from 'gatsby-plugin-image';
-import { timeSince } from '../utils/timeSince';
+import { timeSince } from '../utils';
 
 interface BlogItemProps {
   frontmatter: {
