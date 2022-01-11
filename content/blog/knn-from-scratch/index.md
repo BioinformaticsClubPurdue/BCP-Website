@@ -1,90 +1,140 @@
 ---
-title: Implementing K-Nearest Neighbors From Scratch In Python
+title: Implementing K-Nearest Neighbors From Scratch on Breast Cancer Dataset In Python
 author: Will Forman
 date: 2021-12-26T18:34:28+0000
 image: ./classification_model.png
 ---
 
-Imagine you had a group of dogs and cats. You weighed each animal and noted the color of their fur, and put all the data in a table. Would you be able to create a model, that given these parameters, could decide if the row was a dog or a cat?
+Imagine you had a pile of apples and oranges. You recorded the weight and color of each, and put the data in a table. Would you be able to create a model that can differentiate the two types of fruits?
 
-The answer is yes, as this is one of the biggest applications of data science today. This type of model is a **classification model**. The goal of classification models are to assign some input data into different categories, using statistics to make the decisions.
+The answer is yes, as this is one of the biggest applications of data science today. This type of model is a **classification model**. The goal of classification models are to predict a category based on input data. It does so using statistics to make the decisions.
 
-There is a [famous dataset from the University of Wisconsin](<https://archive.ics.uci.edu/ml/datasets/Breast+Cancer+Wisconsin+(Diagnostic)>) that took mass from patients with and without breast cancer, and noted 32 features. We are going to create our own classification model that will be able to predict which patients did and did not have breast cancer. We will be implementing two common models for classification: K-Nearest Neighbors, and Linear Regression.
+Accurately classifying datasets could be especially useful on applications focused on health care / biology. We are going to implement a type of classification model called **K-Nearest Neighbors** on a breast cancer dataset.
 
-### How It Works
+### How it Works
 
-The K-Nearest Neighbors model is an simple and intuitive model to classify a point. The idea behind it is that similar categories are close together in proximity. We can visualize this with a graph where we know some data points already and which class they belong to:
+K-Nearest Neighbors is a **supervised** classification model. This means that it requires some input data that is already labeled with the correct classes. To train this model, we simply pass it the labeled data (called the *training data*).
 
-![Distribution of two classes](./classification_model.png)
+This data will be used by the model to predict classes following the idea that similar objects stick together. If we have a datapoint $d$ that we'd like to predict, here's what our KNN model will do:
 
-As you can see, points above the model belong to Class 1, and below to Class 2. Of course, in a real data science problem, we won't have this ideal model, so we have to guess some other way.
+1. Find the $k$ *training* datapoints closest to $d$
+2. Find the class with the most representation of these $k$ points
 
-Given a point $p$ at $(a,b)$, we can do the following:
+This class with the most representation is the prediction for $d$.
 
-- Calculate the distance from every labeled point to $(a,b)$
-- Take the $k$ points with the smallest distance
-- $p$ belongs to the majority class of these points
+One other note is that we can choose $k$ however we want. As a good rule of thumb, if you have $n$ datapoints, then choose $k = \sqrt{n}$.
 
-We can visualize this by drawing a very small circle around the point, and expanding it until it surrounds $k$ other points. The following shows that example when $k=3$ and $p$ is at $(50, 50)$:
+### Visualization
 
-![K-Nearest Neighbors Visualization](./knn_model.png)
+We train a KNN model by giving it 100 datapoints, each as a point $(x,y)$. The classes are chosen as following:
 
-Therefore, in this example, $p$ would belong to Class 1. This is easy to do on a graph, but we need a way to calculate the distance between two points. How will we do it?
+- Class A: $y \geq x$
+- Class B: $y < x$
 
-#### Calculating Distance
+![Graph of the two classes](./classification_model.png)
 
-There are 4 commonly used distance metrics in Machine Learning:
+Now, let's try predicting the class of a new point $p$. We will visually do this by drawing a circle at $p$, then expanding it until there are $k$ points inside the circle. We will choose $k = 3$ for simplicity. 
 
-- Euclidean Distance
-- Manhattan Distance
-- Minkowski Distance
-- Hamming Distance
+Here's what the prediction for $p = (45, 47)$:
 
-We will use the **Euclidean Distance** formula, as it's the simplest. It uses the Pythagorean Theorem to find the distance between a point at $(x_1, y_1)$ and a point at $(x_2, y_2)$:
+![Prediction for p](./knn_model.png)
 
-$d=\sqrt{(x_2 - x_1)^2 + (y_2 - y_1)^2}$
+In this example, we would predict $p$ to have be of Class A. This is because two of the points in the circle belong to Class A. 
 
-Expanding this to allow for $n$ dimensions is important, because our dataset has 32 features, therefore 32 dimensions. To calculate the distance between two points $x$ and $y$ of $n$ dimensions is:
+We'll check this by checking that $p_{y} \geq p_{x}$. We see that this in fact true, meaning that the prediction will be correct in this case.
 
-$d = \sqrt{\sum_{i=1}^{n} (x_i - y_i)^2}$
+### Dataset We're Using
 
-#### Choosing K
+There is a [famous dataset from the University of Wisconsin](<https://archive.ics.uci.edu/ml/datasets/Breast+Cancer+Wisconsin+(Diagnostic)>) that took mass from patients with and without breast cancer. It is commonly used for learning purposes due to it's simplicity, therefore being easy to train an accurate model on.
 
-Lastly, we must choose our own $k$ for our model. Remember that $k$ is the number of neighbors we will compare to the point we are trying to classify.
-
-Choosing a low $k$ leads to overfitting, or that noise will have a larger influence on the model. Likewise, choosing a high $k$ leads to underfitting. Therefore, it is critical to get it right
-
-A general rule of thumb for $n$ datapoints is to use $k = \sqrt{n}$. It is also preferred to use an odd number, in the case of tie. For example, if $k = 4$, a possible scenario is that there are two neigbors of Class 1, and two neighbors of Class 2.
-
-### Dataset
-
-|      | present | mean radius | mean texture | mean perimeter | mean area | mean smoothness | mean compactness | mean concavity | mean concave points | mean symmetry | mean fractal dimension | radius error | texture error | perimeter error | area error | smoothness error | compactness error | concavity error | concave points error | symmetry error | fractal dimension error | worst radius | worst texture | worst perimeter | worst area | worst smoothness | worst compactness | worst concavity | worst concave points | worst symmetry | worst fractal dimension |
-| ---: | ------: | ----------: | -----------: | -------------: | --------: | --------------: | ---------------: | -------------: | ------------------: | ------------: | ---------------------: | -----------: | ------------: | --------------: | ---------: | ---------------: | ----------------: | --------------: | -------------------: | -------------: | ----------------------: | -----------: | ------------: | --------------: | ---------: | ---------------: | ----------------: | --------------: | -------------------: | -------------: | ----------------------: |
-|    0 |       0 |       17.99 |        10.38 |          122.8 |      1001 |          0.1184 |           0.2776 |         0.3001 |              0.1471 |        0.2419 |                0.07871 |        1.095 |        0.9053 |           8.589 |      153.4 |         0.006399 |           0.04904 |         0.05373 |              0.01587 |        0.03003 |                0.006193 |        25.38 |         17.33 |           184.6 |       2019 |           0.1622 |            0.6656 |          0.7119 |               0.2654 |         0.4601 |                  0.1189 |
-|    1 |       0 |       20.57 |        17.77 |          132.9 |      1326 |         0.08474 |          0.07864 |         0.0869 |             0.07017 |        0.1812 |                0.05667 |       0.5435 |        0.7339 |           3.398 |      74.08 |         0.005225 |           0.01308 |          0.0186 |               0.0134 |        0.01389 |                0.003532 |        24.99 |         23.41 |           158.8 |       1956 |           0.1238 |            0.1866 |          0.2416 |                0.186 |          0.275 |                 0.08902 |
-|    2 |       0 |       19.69 |        21.25 |            130 |      1203 |          0.1096 |           0.1599 |         0.1974 |              0.1279 |        0.2069 |                0.05999 |       0.7456 |        0.7869 |           4.585 |      94.03 |          0.00615 |           0.04006 |         0.03832 |              0.02058 |         0.0225 |                0.004571 |        23.57 |         25.53 |           152.5 |       1709 |           0.1444 |            0.4245 |          0.4504 |                0.243 |         0.3613 |                 0.08758 |
-|    3 |       0 |       11.42 |        20.38 |          77.58 |     386.1 |          0.1425 |           0.2839 |         0.2414 |              0.1052 |        0.2597 |                0.09744 |       0.4956 |         1.156 |           3.445 |      27.23 |          0.00911 |           0.07458 |         0.05661 |              0.01867 |        0.05963 |                0.009208 |        14.91 |          26.5 |           98.87 |      567.7 |           0.2098 |            0.8663 |          0.6869 |               0.2575 |         0.6638 |                   0.173 |
-|    4 |       0 |       20.29 |        14.34 |          135.1 |      1297 |          0.1003 |           0.1328 |          0.198 |              0.1043 |        0.1809 |                0.05883 |       0.7572 |        0.7813 |           5.438 |      94.44 |          0.01149 |           0.02461 |         0.05688 |              0.01885 |        0.01756 |                0.005115 |        22.54 |         16.67 |           152.2 |       1575 |           0.1374 |             0.205 |             0.4 |               0.1625 |         0.2364 |                 0.07678 |
+Our goal is to predict if the patient has breast cancer. We will do so using the 32 different features. You can take a look at the first 4 datapoints below:
 
 ### Implementation
 
-#### Prerequisites
-
-For this tutorial, you will need a Python 3 installation. I will be using 3.9.9 for this tutorial.
-
-You will also need the following packages installed:
+This tutorial was completed with Python 3.9.9, but most likely any Python3 version will work. It also requires the following packages:
 
 - Sci-Kit Learn
 - Numpy
 - Pandas
 
-#### Using Sci-Kit Learn
+#### Creating our Model
 
-We will quickly go over how to implement this with sci-kit learn, because this is a really easy way to create a classifier.
+As we said before, the two steps for a KNN Model are: 
 
-##### Preparing the data
+1. Find $k$ neighbors
+2. Find majority class of neighbors
 
-First, we are going to load the dataset from Sci-Kit Learn, then seperate it into our x and y variables.
+Step 2 is pretty straightforward. Just count up all occurrences of each class, then return the one with the most occurrences. We will use the builtin `Counter` to do this for us.
+
+```python
+from collections import Counter
+def get_pred(neighbor_labels):
+    counter = Counter(neighbor_labels)
+    pred = counter.most_common(1)[0][0]
+    return pred
+```
+
+Step 1 is more challenging. It was easy enough do this visually with the circle method. How do we do it programmatically though?
+
+We can calculate the distance between two points using the **Euclidean Distance** formula. It uses the Pythagorean Theorem to find the distance between a point at $(x_1, y_1)$ and a point at $(x_2, y_2)$:
+
+$d=\sqrt{(x_2 - x_1)^2 + (y_2 - y_1)^2}$
+
+Notice that this works on points with only an x and y, meaning two dimensions. Our dataset has 32 dimensions, so we need to expand the formula for $n$ dimensions:
+
+$d = \sqrt{\sum_{i=1}^{n} (x_i - y_i)^2}$
+
+We will need this for our model, so let's make a function for it.
+
+```python
+def euclidean_dist(point1, point2):
+    sum = 0
+    for feature1, feature2 in zip(point1, point2):
+        squared_difference = (feature2 - feature1) ** 2
+        sum += squared_difference
+
+    return sqrt(sum)
+```
+
+We now need to calculate the distance from every train point to the test point.
+
+```python
+def calc_dists(x_train, test_point):
+    dists = []
+    for train_point in x_train:
+        dist = euclidean_dist(train_point, test_point)
+        dists.append(dist)
+    
+    return dists
+```
+
+Next, we'll need to use these distances to get the $k$ neighbors.
+
+```python
+def get_neighbor_labels(dists, y_train, n_neighbors):
+    dists_df = pd.DataFrame(data=dists, columns=['dist'])
+    dists_df_sorted = dists_df.sort_values(by=['dist'], axis=0)
+
+    neighbors_indices = dists_df_sorted[:n_neighbors].index.values
+    neighbors_labels = [y_train[neighbor_index]
+                        for neighbor_index in neighbors_indices]
+    return neighbors_labels
+```
+
+Now we have all the functions to return the predictions for a set of test points. We'll just need a function to calculate our accuracy.
+
+```python
+def get_score(y_test, y_pred):
+    correct_predictions = 0
+    for class_test, class_pred in zip(y_test, y_pred):
+        if class_test == class_pred:
+            correct_predictions += 1
+    return correct_predictions / len(y_test)
+```
+
+#### Preparing the Data
+
+The first thing we will need to do is get the data. Instead of downloading our own csv data file, we can simply use Sci-Kit Learn to load it.
 
 ```python
 from sklearn.datasets import load_breast_cancer
@@ -119,30 +169,64 @@ n = x.shape[0] # 569
 k = floor(sqrt(n)) # 23
 ```
 
-##### Training the Model
+#### Implementing the Model
 
-Now, we will pass the training data into the model to train it.
-
-```python
-from sklearn.neighbors import KNeighborsClassifier
-
-knn = KNeighborsClassifier(n_neighbors=k)
-knn.fit(x_train, y_train)
-```
-
-##### Testing the Model
-
-Finally, we can use the model to predict for the test data.
-
-```
-y_test_pred = knn.predict(x_test)
-```
-
-We now can calculate the score like so.
+Now, all we have to do is use the functions we wrote above to get the prediction for each point. Once have each prediction, we can score how accurate our model is.
 
 ```python
-score = knn.score(x_test, y_test)
-print(f'Custom KNN without normalization {score}')
+y_pred = []
+for test_point in x_test:
+    dists = calc_dists(x_train, test_point)
+    neighbor_labels = get_neighbor_labels(dists, y_train, k)
+    pred = get_pred(neighbor_labels)
+    y_pred.append(pred)
+
+score = get_score(y_test, y_pred)
+score
 ```
 
-This results in a score of 
+After all that work, we finally can see how accurate our model is. It scored **92.3%**! Not bad for about 25 lines of code. However, we can do better using **normalization**.
+
+#### Normalization
+
+Notice how in our dataset, some measurements are in the decimals and others are in the thousands. When a point in the decimals is off by .5, it's a big difference relatively to a number in the decimals. Meanwhile, a point in the thousands, but it'll only be off by 10, so it's not that big of a difference relatively. The problem is, the weightings don't treat it that way.
+
+Data with a larger magnitude is weighted much heavier in our calculations, unless if we normalization. Normalization reduces this unfair weighting, and will consequently make our model more accurate. This is the formula for normalization:
+
+$x_{norm} = \frac{x - \mu} {\phi}$
+
+where $\mu$ is the mean and $\phi$ is the standard deviation.
+
+We calculate the normalized values for x.
+
+```python
+x_mean = x.mean(axis=0)
+x_std = x.std(axis=0)
+
+x_train_norm = (x_train - x_mean) / x_std
+x_test_norm = (x_test - x_mean) / x_std
+```
+
+Then, we'll calculate the score exactly the same as above, this time using the normalized values.
+
+```python
+y_pred = []
+for test_point in x_test_norm:
+    dists = calc_dists(x_train_norm, test_point)
+    neighbor_labels = get_neighbor_labels(dists, y_train, k)
+    pred = get_pred(neighbor_labels)
+    y_pred.append(pred)
+
+score = get_score(y_test, y_pred)
+score
+```
+
+This time the score is **95.1%**! 
+
+### Conclusion
+
+In then end, we were able to create a very acurate model for determining if a patient has breast cancer or not. We did so creating a K-Nearest Neighbors from scratch. We also used normalization to make our model even more accurate.
+
+Sci-Kit Learn has a very similar implementation of K-Nearest Neighbors that you can use on your own to do this much quicker.
+
+The main takeaway is that even a simple model can work on a dataset with a lot of features, and that you can do it yourself. You can use this on whatever dataset you want, and see if it's a good fit.
