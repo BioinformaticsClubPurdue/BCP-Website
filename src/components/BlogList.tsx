@@ -8,7 +8,7 @@ import {
 } from '@chakra-ui/react';
 import { graphql, useStaticQuery, Link as GatsbyLink } from 'gatsby';
 import { GatsbyImage, getImage } from 'gatsby-plugin-image';
-import { timeSince } from '../utils/timeSince';
+import { timeSince } from '../utils';
 
 interface BlogItemProps {
   frontmatter: {
@@ -96,7 +96,7 @@ const BlogList: React.FC<BlogListProps> = () => {
   const { blog } = useStaticQuery<BlogQueryType>(blogQuery);
 
   return (
-    <VStack m={3}>
+    <VStack m={3} height="100%" my="10">
       <Text fontSize="3xl">Blog Posts</Text>
       <Grid
         templateColumns={[
