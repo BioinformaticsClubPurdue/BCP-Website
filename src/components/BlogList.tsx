@@ -96,7 +96,7 @@ const BlogList: React.FC<BlogListProps> = () => {
   const { blog } = useStaticQuery<BlogQueryType>(blogQuery);
 
   return (
-    <VStack m={3}>
+    <VStack m={3} height="100%" my="10">
       <Text fontSize="3xl">Blog Posts</Text>
       <Grid
         templateColumns={[
