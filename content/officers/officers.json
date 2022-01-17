@@ -1,0 +1,22 @@
+[
+  {
+    "name": "Alex Bergendorf",
+    "year": "Junior",
+    "major": "Biomedical Engineering",
+    "email": "abergend@purdue.edu",
+    "position": "President",
+    "goals": "Masters in Biomedical Data Science, work in industry for a pharmaceutical company",
+    "interests": ["Tennis", "Soccer", "Working out", "Traveling"],
+    "image": "./alex_bergendorf.jpg"
+  },
+  {
+    "name": "Will Forman",
+    "year": "Junior",
+    "major": "Computer Engineering",
+    "email": "wforman@purdue.edu",
+    "position": "Secretary",
+    "goals": "Work in industry as a software engineer",
+    "interests": ["Chicago sports", "Chess"],
+    "image": "./will_forman.jpeg"
+  }
+]
