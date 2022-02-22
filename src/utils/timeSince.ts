@@ -1,3 +1,5 @@
+
+
 export const timeSince = (date: number): string => {
   const seconds = Math.floor((Date.now() - date) / 1000);
 
@@ -26,3 +28,4 @@ export const timeSince = (date: number): string => {
   }
   return `${seconds} seconds`;
 };
+

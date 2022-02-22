@@ -9,10 +9,11 @@ import {
   Heading,
   Box,
   Text,
+  HStack,
 } from '@chakra-ui/react';
 import { graphql, useStaticQuery } from 'gatsby';
 import { GatsbyImage, getImage } from 'gatsby-plugin-image';
-import { FaClipboardCheck, FaInbox } from 'react-icons/fa';
+import { FaClipboardCheck, FaInbox, FaThumbsUp, FaBook } from 'react-icons/fa';
 
 interface OfficerCardProps {
   name: string;
@@ -21,7 +22,8 @@ interface OfficerCardProps {
   email: string;
   position: string;
   goals: string;
-  interests: string[];
+  interests: string;
+  currentWork: string;
   imageSrc: any;
 }
 
@@ -33,6 +35,7 @@ const OfficerCard: React.FC<OfficerCardProps> = ({
   position,
   goals,
   interests,
+  currentWork,
   imageSrc,
 }) => {
   const image = getImage(imageSrc);
@@ -47,7 +50,7 @@ const OfficerCard: React.FC<OfficerCardProps> = ({
         roundedTop="md"
       />
       <VStack bg="white" boxShadow="lg" padding="5" roundedBottom="md">
-        <List fontSize="large" width="100%" spacing="3">
+        <List fontSize="large" width="100%" spacing="2">
           <ListItem>
             <Heading>{`${name} - ${position}`}</Heading>
           </ListItem>
@@ -55,12 +58,28 @@ const OfficerCard: React.FC<OfficerCardProps> = ({
             <Text color="gray.600">{`${year} | ${major}`}</Text>
           </ListItem>
           <ListItem>
-            <ListIcon as={FaInbox} />
-            {email}
+            <HStack>
+              <ListIcon as={FaBook} />
+              <Text>{currentWork}</Text>
+            </HStack>
           </ListItem>
           <ListItem>
-            <ListIcon as={FaClipboardCheck} />
-            {goals}
+            <HStack>
+              <ListIcon as={FaClipboardCheck} />
+              <Text>{goals}</Text>
+            </HStack>
+          </ListItem>
+          <ListItem>
+            <HStack>
+              <ListIcon as={FaThumbsUp} />
+              <Text>{interests}</Text>
+            </HStack>
+          </ListItem>
+          <ListItem>
+            <HStack>
+              <ListIcon as={FaInbox} />
+              <Text>{email}</Text>
+            </HStack>
           </ListItem>
         </List>
       </VStack>
@@ -85,6 +104,7 @@ const officerQuery = graphql`
         position
         goals
         interests
+        currentWork: current_work
         imageSrc: image {
           childImageSharp {
             gatsbyImageData(placeholder: BLURRED, layout: FULL_WIDTH)
@@ -103,12 +123,7 @@ const OfficerList: React.FC<OfficerListProps> = () => {
     <Box m={['1', '3', '5', '7', '9']} height="100%">
       <Heading textAlign="center">Meet the Officers</Heading>
       <Grid
-        templateColumns={[
-          'repeat(1, 1fr)',
-          'repeat(2, 1fr)',
-          'repeat(3, 1fr)',
-          'repeat(4, 1fr)',
-        ]}
+        templateColumns={['repeat(1, 1fr)', 'repeat(2, 1fr)', 'repeat(3, 1fr)']}
         gap="10"
         margin="5"
       >
@@ -123,6 +138,7 @@ const OfficerList: React.FC<OfficerListProps> = () => {
             goals={officer.goals}
             interests={officer.interests}
             imageSrc={officer.imageSrc}
+            currentWork={officer.currentWork}
           />
         ))}
       </Grid>

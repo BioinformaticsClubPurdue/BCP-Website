@@ -14,7 +14,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => (
     overflowX="auto"
     background="scheme.background"
   >
-    <Navbar links={['contact', 'schedule', 'blog']} />
+    <Navbar links={['contact', 'schedule']} />
     <Box as="main">{children}</Box>
   </Grid>
 );

@@ -5,9 +5,43 @@
     "major": "Biomedical Engineering",
     "email": "abergend@purdue.edu",
     "position": "President",
-    "goals": "Masters in Biomedical Data Science, work in industry for a pharmaceutical company",
-    "interests": ["Tennis", "Soccer", "Working out", "Traveling"],
+    "goals": "MS Biomedical DS, then work at pharmaceutical company",
+    "interests": "Tennis, Soccer, Working out, Traveling",
+    "current_work": "Developing cell-type deconvolution for modeling host-microbiome interactions in IBD",
     "image": "./alex_bergendorf.jpg"
+  },
+  {
+    "name": "Anirudh Sivarajan",
+    "year": "Junior",
+    "major": "Biomedical Engineering",
+    "email": "sivaraja@purdue.edu",
+    "position": "Vice President",
+    "goals": "PhD in Computational Biology",
+    "interests": "Running, Music",
+    "current_work": "Researching sleep-wake cycle's impact on Alzheimer's",
+    "image": "./anirudh_sivarajan.jpg"
+  },
+  {
+    "name": "Nina Render",
+    "year": "Junior",
+    "major": "Biomedical Engineering",
+    "email": "@purdue.edu",
+    "position": "Marketing Director",
+    "goals": "Post-Grad focused on bioinformatics + medicine problems",
+    "interests": "Exercise, Movies, Piano",
+    "current_work": "Computational analysis on cytokine activity in bacterial vagionis",
+    "image": "./nina_render.jpg"
+  },
+  {
+    "name": "Tucker Ross",
+    "year": "Junior",
+    "major": "Biomedical Engineering",
+    "email": "@purdue.edu",
+    "position": "Treasurer",
+    "goals": "",
+    "interests": "",
+    "current_work": "",
+    "image": "./tucker_ross.jpeg"
   },
   {
     "name": "Will Forman",
@@ -15,8 +49,9 @@
     "major": "Computer Engineering",
     "email": "wforman@purdue.edu",
     "position": "Secretary",
-    "goals": "Work in industry as a software engineer",
-    "interests": ["Chicago sports", "Chess"],
+    "goals": "Software engineer in industry",
+    "interests": "Chicago sports, Chess, Working out, Music",
+    "current_work": "SWE at startup, SWE intern at Meta",
     "image": "./will_forman.jpeg"
   }
 ]

@@ -113,6 +113,9 @@ const BlogPost: React.FC<BlogPostProps> = ({ data }) => {
               marginTop: '2.33em',
               marginBottom: '2.33em',
             },
+            img: {
+              width: '1em',
+            },
           }}
         />
       </Box>

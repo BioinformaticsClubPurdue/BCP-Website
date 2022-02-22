@@ -1,6 +1,11 @@
 module.exports = {
   plugins: [
-    '@chakra-ui/gatsby-plugin',
+    {
+      resolve: '@chakra-ui/gatsby-plugin',
+      options: {
+        isResettingCSS: false,
+      },
+    },
     'gatsby-plugin-image',
     {
       resolve: 'gatsby-source-filesystem',
@@ -37,7 +42,7 @@ module.exports = {
           {
             resolve: `gatsby-remark-images`,
             options: {
-              maxWidth: 630,
+              maxWidth: 200,
             },
           },
           `gatsby-remark-prismjs`,

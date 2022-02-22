@@ -5,19 +5,17 @@ date: 2021-12-26T18:34:28+0000
 image: ./classification_model.png
 ---
 
-Imagine you had a pile of apples and oranges. You recorded the weight and color of each, and put the data in a table. Would you be able to create a model that can differentiate the two types of fruits?
-
-The answer is yes, as this is one of the biggest applications of data science today. This type of model is a **classification model**. The goal of classification models are to predict a category based on input data. It does so using statistics to make the decisions.
+One of the biggest applications of data science today are **classification models**. The goal of a classification model is to predict a category based on input data. It does so using statistics to make the decisions.
 
 Accurately classifying datasets could be especially useful on applications focused on health care / biology. We are going to implement a type of classification model called **K-Nearest Neighbors** on a breast cancer dataset.
 
 ### How it Works
 
-K-Nearest Neighbors is a **supervised** classification model. This means that it requires some input data that is already labeled with the correct classes. To train this model, we simply pass it the labeled data (called the *training data*).
+K-Nearest Neighbors is a **supervised** classification model. This means that it requires some input data that is already labeled with the correct classes. To train this model, we simply pass it the labeled data (called the _training data_).
 
 This data will be used by the model to predict classes following the idea that similar objects stick together. If we have a datapoint $d$ that we'd like to predict, here's what our KNN model will do:
 
-1. Find the $k$ *training* datapoints closest to $d$
+1. Find the $k$ _training_ datapoints closest to $d$
 2. Find the class with the most representation of these $k$ points
 
 This class with the most representation is the prediction for $d$.
@@ -33,13 +31,13 @@ We train a KNN model by giving it 100 datapoints, each as a point $(x,y)$. The c
 
 ![Graph of the two classes](./classification_model.png)
 
-Now, let's try predicting the class of a new point $p$. We will visually do this by drawing a circle at $p$, then expanding it until there are $k$ points inside the circle. We will choose $k = 3$ for simplicity. 
+Now, let's try predicting the class of a new point $p$. We will visually do this by drawing a circle at $p$, then expanding it until there are $k$ points inside the circle. We will choose $k = 3$ for simplicity.
 
 Here's what the prediction for $p = (45, 47)$:
 
 ![Prediction for p](./knn_model.png)
 
-In this example, we would predict $p$ to have be of Class A. This is because two of the points in the circle belong to Class A. 
+In this example, we would predict $p$ to have be of Class A. This is because two of the points in the circle belong to Class A.
 
 We'll check this by checking that $p_{y} \geq p_{x}$. We see that this in fact true, meaning that the prediction will be correct in this case.
 
@@ -59,7 +57,7 @@ This tutorial was completed with Python 3.9.9, but most likely any Python3 versi
 
 #### Creating our Model
 
-As we said before, the two steps for a KNN Model are: 
+As we said before, the two steps for a KNN Model are:
 
 1. Find $k$ neighbors
 2. Find majority class of neighbors
@@ -104,7 +102,7 @@ def calc_dists(x_train, test_point):
     for train_point in x_train:
         dist = euclidean_dist(train_point, test_point)
         dists.append(dist)
-    
+
     return dists
 ```
 
@@ -155,7 +153,7 @@ x_train, x_test, y_train, y_test = train_test_split(x, y, random_state=0, strati
 # that data will be split into test/train
 # the same way each time we run the program
 #
-# stratify = y: preserve the proportion of 
+# stratify = y: preserve the proportion of
 # targets from the original dataset to the
 # test/train sets
 ```
@@ -221,7 +219,7 @@ score = get_score(y_test, y_pred)
 score
 ```
 
-This time the score is **95.1%**! 
+This time the score is **95.1%**!
 
 ### Conclusion
 
@@ -229,4 +227,4 @@ In then end, we were able to create a very acurate model for determining if a pa
 
 Sci-Kit Learn has a very similar implementation of K-Nearest Neighbors that you can use on your own to do this much quicker.
 
-The main takeaway is that even a simple model can work on a dataset with a lot of features, and that you can do it yourself. You can use this on whatever dataset you want, and see if it's a good fit.
+The main takeaway is that even a simple model can work on a dataset with a lot of features. Creating a powerful model doesn't always have to be complex.
