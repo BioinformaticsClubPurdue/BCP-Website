@@ -10,7 +10,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => (
   <Grid
     templateRows="50px auto"
     minH="100vh"
-    overflowY="auto"
+    overflowY="hidden"
     overflowX="auto"
     background="scheme.background"
   >
