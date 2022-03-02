@@ -6,7 +6,7 @@
     "email": "abergend@purdue.edu",
     "position": "President",
     "goals": "MS Biomedical DS, then work at pharmaceutical company",
-    "interests": "Tennis, Soccer, Working out, Traveling",
+    "interests": "Tennis, Soccer, Working out, Travel",
     "current_work": "Developing cell-type deconvolution for modeling host-microbiome interactions in IBD",
     "image": "./alex_bergendorf.jpg"
   },
@@ -25,7 +25,7 @@
     "name": "Nina Render",
     "year": "Junior",
     "major": "Biomedical Engineering",
-    "email": "@purdue.edu",
+    "email": "nrender@purdue.edu",
     "position": "Marketing Director",
     "goals": "Post-Grad focused on bioinformatics + medicine problems",
     "interests": "Exercise, Movies, Piano",
@@ -36,11 +36,11 @@
     "name": "Tucker Ross",
     "year": "Junior",
     "major": "Biomedical Engineering",
-    "email": "@purdue.edu",
+    "email": "ross272@purdue.edu",
     "position": "Treasurer",
-    "goals": "",
-    "interests": "",
-    "current_work": "",
+    "goals": "Work in medical device industry, MBA in the future",
+    "interests": "Football, Formula 1, Swimming, Travel",
+    "current_work": "School and being member of BDSBC and ZBT",
     "image": "./tucker_ross.jpeg"
   },
   {
@@ -51,7 +51,7 @@
     "position": "Secretary",
     "goals": "Software engineer in industry",
     "interests": "Chicago sports, Chess, Working out, Music",
-    "current_work": "SWE at startup, SWE intern at Meta",
+    "current_work": "SWE intern at Meta",
     "image": "./will_forman.jpeg"
   }
 ]
